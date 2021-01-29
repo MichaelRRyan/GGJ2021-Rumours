@@ -1,1 +1,1 @@
-# Rumours - A social part game made for GGJ2021
+# Rumours - A social game made for GGJ2021
