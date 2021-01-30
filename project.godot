@@ -16,7 +16,11 @@ _global_script_class_icons={
 [application]
 
 config/name="Rumours"
-run/main_scene="res://card.tscn"
+run/main_scene="res://Scenes/Card.tscn"
+
+[autoload]
+
+CharacterData="*res://scripts/CharacterData.gd"
 
 [display]
 

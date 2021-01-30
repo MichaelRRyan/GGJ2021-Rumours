@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/Valera.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/paper.png" type="Texture" id=2]
-[ext_resource path="res://scripts/generate.gd" type="Script" id=3]
+[ext_resource path="res://scripts/GenerateCharacter.gd" type="Script" id=3]
 [ext_resource path="res://assets/images/playericons/outline.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
