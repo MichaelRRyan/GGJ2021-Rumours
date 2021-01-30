@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Rumours"
-config/icon="res://assets/images/icon.png"
+run/main_scene="res://card.tscn"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [rendering]
 
