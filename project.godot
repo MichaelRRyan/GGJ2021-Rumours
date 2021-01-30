@@ -16,16 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Rumours"
-run/main_scene="res://Scenes/Card.tscn"
+run/main_scene="res://Scenes/TitleScreen.tscn"
+config/icon="res://assets/images/paper.png"
 
 [autoload]
 
 CharacterData="*res://scripts/CharacterData.gd"
-
-[display]
-
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+Server="*res://scripts/Server.gd"
+GameData="*res://scripts/GameData.gd"
 
 [rendering]
 

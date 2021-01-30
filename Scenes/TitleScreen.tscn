@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/TextEnterDialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/TitleScreen.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/Valera32.tres" type="DynamicFont" id=3]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -277.0
+margin_top = -147.0
+margin_right = 277.0
+margin_bottom = 147.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinGameButton" type="Button" parent="VBoxContainer"]
+margin_top = 57.0
+margin_right = 554.0
+margin_bottom = 137.0
+rect_min_size = Vector2( 0, 80 )
+custom_fonts/font = ExtResource( 3 )
+text = "Join Game"
+
+[node name="CreateGameButton" type="Button" parent="VBoxContainer"]
+margin_top = 157.0
+margin_right = 554.0
+margin_bottom = 237.0
+rect_min_size = Vector2( 0, 80 )
+custom_fonts/font = ExtResource( 3 )
+text = "Create Game"
+
+[node name="JoinLobbyDialog" parent="." instance=ExtResource( 1 )]
+visible = false
+dialog_name = "Enter Lobby Code"
+placeholder_text = "Lobby Code"
+text_limit = 4
+[connection signal="pressed" from="VBoxContainer/JoinGameButton" to="." method="_on_JoinGameButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreateGameButton" to="." method="_on_CreateGameButton_pressed"]
+[connection signal="confirm_pressed" from="JoinLobbyDialog" to="." method="_on_JoinLobbyDialog_confirm_pressed"]
