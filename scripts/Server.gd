@@ -27,24 +27,24 @@ func _peer_disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
 
 
-remote func request_create_lobby():
+# ------------- Functionality -----------------------
+remote func request_create_lobby(player_name):
 	var player_id = get_tree().get_rpc_sender_id()
-	var lobby_code = GameManager.create_lobby(player_id)
+	var lobby_code = GameManager.create_lobby(player_id, player_name)
 	
 	rpc_id(player_id, "return_lobby_code", lobby_code)
 	print("Lobby created with code " + lobby_code + " by player " + str(player_id))
 
 
-remote func request_join_lobby(lobby_code):
+remote func request_join_lobby(lobby_code, player_name, requester):
 	var player_id = get_tree().get_rpc_sender_id()
-	var result = GameManager.join_lobby(lobby_code, player_id)
+	var result = GameManager.join_lobby(lobby_code, player_id, player_name)
 
-	if result:
-		rpc_id(player_id, "joined_lobby_successfully", result)
+	if typeof(result) == TYPE_STRING:
+		rpc_id(player_id, "failed_to_join_lobby", result, requester)
 	else:
-		rpc_id(player_id, "failed_to_join_lobby")
-
-
-remote func set_player_name(lobby_code, player_name):
-	var player_id = get_tree().get_rpc_sender_id()
-	GameManager.set_player_name(lobby_code, player_id, player_name)
+		rpc_id(player_id, "joined_lobby_successfully", result)
+		
+		for id in GameManager.active_games[lobby_code]["player_data"].keys():
+			if id != player_id:
+				rpc_id(id, "player_joined_lobby", player_name)
