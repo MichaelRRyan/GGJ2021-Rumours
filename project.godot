@@ -22,6 +22,8 @@ run/main_scene="res://Scenes/Card.tscn"
 
 CharacterData="*res://scripts/CharacterData.gd"
 InfoData="*res://scripts/InfoData.gd"
+Server="*res://scripts/Server.gd"
+GameData="*res://scripts/GameData.gd"
 
 [display]
 
