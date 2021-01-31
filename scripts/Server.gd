@@ -71,3 +71,13 @@ remote func player_ready(lobby_code):
 remote func player_not_ready(lobby_code):
 	var player_id = get_tree().get_rpc_sender_id()
 	GameManager.player_not_ready(lobby_code, player_id)
+
+
+remote func get_player_traits(lobby_code, name):
+	var player_id = get_tree().get_rpc_sender_id()
+	var player_info = GameManager.active_games[lobby_code]["player_data"].values()
+	
+	for player in player_info:
+		if player["name"] == name:
+			var traits = player["traits"]
+			rpc_id(player_id, "recieve_traits", traits)
