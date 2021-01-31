@@ -87,3 +87,11 @@ func start_game():
 remote func on_start_game():
 	if get_tree().change_scene("res://Scenes/GameScreen.tscn") != OK:
 		print("Failed to switch scenes to GameScreen")
+
+
+func get_player_traits(name):
+	rpc_id(1, "get_player_name", GameData.lobby_code, name)
+
+
+remote func recieve_traits(traits):
+	GameData.game_scene.get_traits(traits)

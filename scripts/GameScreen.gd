@@ -37,3 +37,7 @@ func start_vote():
 	$ReadyUpPanel/ReadyUpBox.disabled = true
 	$ReadyUpPanel/ReadyUpTimer.start()
 	$ReadyUpPanel/ReadyUpTimerLabel.show()
+
+
+func get_traits(traits):
+	pass
