@@ -3,6 +3,7 @@ extends Node
 # Defines a dictionary of game data.
 var active_games = {}
 
+var players = {}
 
 #var active_games = {
 #	"9457": { 
@@ -89,6 +90,46 @@ func join_lobby(lobby_code, player_id, player_name):
 
 
 func create_player(lobby_code, player_id, player_name):
+	players[player_id] = lobby_code
+	
 	active_games[lobby_code]["player_data"][player_id] = { 
-		"name": player_name, "traits": []
+		"name": player_name, "traits": [], "ready": false
 	}
+
+
+func start_game(lobby_code):
+	active_games[lobby_code]["in_progress"] = true
+
+
+func player_ready(lobby_code, player_id):
+	active_games[lobby_code]["player_data"][player_id]["ready"] = true
+	
+	# Checks if all players are ready.
+	var ready_players = 0
+	for player_data in active_games[lobby_code]["player_data"].values():
+		if player_data["ready"]:
+			ready_players += 1
+	
+	if active_games[lobby_code]["player_data"].values().size() == ready_players:
+		
+		# Sets all players to not ready for the move onto the next day.
+		for player_data in active_games[lobby_code]["player_data"].values():
+			player_data["ready"] = false
+
+		return true
+	
+	return false
+
+
+func player_not_ready(lobby_code, player_id):
+	active_games[lobby_code]["player_data"][player_id]["ready"] = false
+
+
+func remove_player(player_id):
+	var lobby_code = players[player_id]
+	active_games[lobby_code]["player_data"].erase(player_id)
+	players.erase(player_id)
+	
+	if active_games[lobby_code]["player_data"].keys().size() == 0:
+		active_games.erase(lobby_code)
+		print("Lobby" + lobby_code + " was closed")
