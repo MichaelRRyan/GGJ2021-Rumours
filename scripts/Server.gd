@@ -58,9 +58,10 @@ remote func request_join_lobby(lobby_code, player_name, requester):
 
 remote func start_game(lobby_code):
 	GameManager.start_game(lobby_code)
+	var player_data = GameManager.active_games[lobby_code]["player_data"].values()
 	
 	for id in GameManager.active_games[lobby_code]["player_data"].keys():
-		rpc_id(id, "on_start_game")
+		rpc_id(id, "on_start_game", player_data)
 
 
 remote func player_ready(lobby_code):

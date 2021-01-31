@@ -98,15 +98,53 @@ func create_player(lobby_code, player_id, player_name):
 	
 	active_games[lobby_code]["player_data"][player_id] = { 
 		"name": player_name,
-		"alignment": alignment,
-		"features": [ feat1, feat2, feat3 ],
-		"traits": [ trait1, trait2 ],
+		"alignment": null,
+		"features": [],
+		"traits": [],
 		"ready": false
 	}
 
 
+func generate_player_data(lobby_code):
+	var player_data = active_games[lobby_code]["player_data"].values()
+	
+	var number_of_criminals = floor(player_data.size() / 2)
+	var criminal_indices = []
+	
+	# Loop for each criminal
+	for _i in range(number_of_criminals):
+		
+		var index = randi() % player_data.size() # Generates a random index.
+		
+		# Loops until an index that is not in the array is picked.
+		while criminal_indices.count(index) > 0:
+			index = randi() % player_data.size() # Generates a random index.
+		
+		criminal_indices.append(index)
+		
+	for i in range(player_data.size()):
+		
+		var alignment
+		
+		if criminal_indices.count(i) > 0:
+			alignment = 1
+		else:
+			alignment = 0
+		
+		player_data[i]["alignment"] = alignment
+		
+		player_data[i]["traits"].append(randi() % 2 + (alignment * 2))
+		player_data[i]["traits"].append(randi() % 17 + 4)
+		
+		player_data[i]["features"].append(randi() % 7)
+		player_data[i]["features"].append(randi() % 7)
+		player_data[i]["features"].append(randi() % 11)
+		
+		
 func start_game(lobby_code):
 	active_games[lobby_code]["in_progress"] = true
+	
+	generate_player_data(lobby_code)
 
 
 func player_ready(lobby_code, player_id):
