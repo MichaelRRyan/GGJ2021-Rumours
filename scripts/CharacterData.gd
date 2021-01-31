@@ -31,7 +31,31 @@ var traits = [
 	{ "name": "Artist", "desc": "Rumors are presented as drawings" },
 	{ "name": "Child", "desc": "Hears all rumors sent to a specific person but cant send rumors" },
 	{ "name": "Butler", "desc": "Rumors from the butler come always up as fake when investigated" },
-	{ "name": "PR manager", "desc": "Can choose another person and negate all rumors about them this round" }
+	{ "name": "PR Manager", "desc": "Can choose another person and negate all rumors about them this round" }
+]
+
+var rp_traits = [
+	{ "name": "Drunk", "desc": "Most know you as the town drunk" },
+	{ "name": "Aggressive", "desc": "You always treat others with hostility" },
+	{ "name": "Anxious", "desc": "Are they talking about you?" },
+	{ "name": "Bossy", "desc": "Lead the conversation and order people around" },	
+	{ "name": "Clumsy", "desc": "Make lots of mistakes" },
+	{ "name": "Cowardly", "desc": "Scared to give information" },
+	{ "name": "Dangerous", "desc": "You sound pretty scary" },
+	{ "name": "Deceitful", "desc": "Compulsively tell lies" },
+	{ "name": "Devious", "desc": "Try to scheme and look suspicious" },
+	{ "name": "Jester", "desc": "Always place yourself at the scene of the crime" },
+	{ "name": "Discouraging", "desc": "Always try to put everyone down" },
+	{ "name": "Encouraging", "desc": "Try to compliment everyone" },
+	{ "name": "Flirt", "desc": "Act heavily flirtatious" },
+	{ "name": "Disruptive", "desc": "Talk over people as much as possible" },
+	{ "name": "Lazy", "desc": "Only give out information if you feel like it" },
+	{ "name": "Jealous", "desc": "Try to 1up everyone with false info" },
+	{ "name": "Moan", "desc": "Complain as much as possible" },
+	{ "name": "Grim", "desc": "Talk as morbidly dark as possible" },
+	{ "name": "Shy", "desc": "Don't talk a lot, but if you do, do it quietly" },
+	{ "name": "Liar", "desc": "Tell lies for no reason" },
+	{ "name": "Weak", "desc": "Make empty threats" }
 ]
 
 var features_head = [

@@ -12,4 +12,9 @@ func _on_Button_pressed():
 	
 	#generates info for specific player
 func generateInfo():
-	pass
+	
+	var threshold = rng.randi_range(0,1)
+	
+	if threshold == 1:
+		var evidence = InfoData.false_evidence[rng.randi_range(0, InfoData.false_evidence.size() -1)]
+		get_node("Evidence/Evidence1").text = evidence

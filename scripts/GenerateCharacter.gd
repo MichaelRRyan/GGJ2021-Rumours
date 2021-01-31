@@ -25,6 +25,7 @@ func generateCharacter():
 	var trait1 = rng.randi_range(0, 1) + (alignment * 2)
 	var num_traits = CharacterData.traits.size() - 1
 	var trait2 = rng.randi_range(4, num_traits)
+	var trait3 = rng.randi_range(0, CharacterData.rp_traits.size() - 1)
 	
 	var firstName = CharacterData.first_names[rng.randi_range(0, CharacterData.first_names.size() - 1)]
 	var lastName = CharacterData.last_names[rng.randi_range(0, CharacterData.last_names.size() - 1)]
@@ -32,10 +33,10 @@ func generateCharacter():
 	create_character(firstName + " " + lastName,
 					 rng.randi_range(0, 1),
 					 feat1, feat2, feat3,
-					 trait1, trait2)
+					 trait1, trait2, trait3)
 
 
-func create_character(character_name, alignment, feat1, feat2, feat3, trait1, trait2):
+func create_character(character_name, alignment, feat1, feat2, feat3, trait1, trait2, trait3):
 	
 	CharacterData.playerName = character_name
 	CharacterData.playerAlignment = alignment
@@ -71,3 +72,8 @@ func create_character(character_name, alignment, feat1, feat2, feat3, trait1, tr
 	var neut_trait = CharacterData.traits[trait2]
 	
 	get_node("VBoxContainer/Trait2").text = neut_trait["name"] + ": " + neut_trait["desc"]
+	
+	# Decides the rp traits and their descriptions.
+	var rp_trait = CharacterData.rp_traits[trait3]
+	
+	get_node("VBoxContainer/Trait3").text = rp_trait["name"] + ": " + rp_trait["desc"]
