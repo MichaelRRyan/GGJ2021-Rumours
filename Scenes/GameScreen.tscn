@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Info.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/Valera32.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scripts/GameScreen.gd" type="Script" id=4]
 
 [node name="GameScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -28,3 +31,32 @@ __meta__ = {
 [node name="InfoCard" parent="HBoxContainer" instance=ExtResource( 1 )]
 margin_left = 312.0
 margin_right = 620.0
+
+[node name="ReadyUpPanel" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -327.0
+margin_top = -74.0
+margin_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadyUpBox" type="CheckBox" parent="ReadyUpPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -134.5
+margin_top = -56.5
+margin_right = 134.5
+margin_bottom = 56.5
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+text = "Ready To Vote"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="toggled" from="ReadyUpPanel/ReadyUpBox" to="." method="_on_ReadyUpBox_toggled"]
