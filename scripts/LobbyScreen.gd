@@ -5,20 +5,26 @@ var player_count = 0
 func _ready():
 	$LobbyNumber.text = GameData.lobby_code
 
-	if GameData.player_names:
-		for name in GameData.player_names:
-			add_player_name(name)
-			player_count += 1
+	var player_names = GameData.player_data.keys()
+	
+	for name in player_names:
+		add_player_name(name)
+		player_count += 1
 	
 	if GameData.host:
 		$StartGameButton.show()
 
 
 func _process(_delta):
-	if GameData.player_names.size() > player_count:
-		for i in range(player_count, GameData.player_names.size()):
-			add_player_name(GameData.player_names[i])
-		player_count = GameData.player_names.size()
+	if GameData.player_data.keys().size() > player_count:
+		for label in $PlayerList.get_children():
+			label.queue_free()
+		player_count = 0
+		
+		var player_names = GameData.player_data.keys()
+		for name in player_names:
+			add_player_name(name)
+			player_count += 1
 
 
 func add_player_name(name):
@@ -29,5 +35,5 @@ func add_player_name(name):
 
 
 func _on_StartGameButton_pressed():
-	if GameData.player_names.size() >= 2:
+	if player_count >= 2:
 		Server.start_game()

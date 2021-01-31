@@ -27,14 +27,19 @@ func _on_connection_failed():
 
 
 func create_lobby(player_name):
-	GameData.player_names = [ player_name ]
+	GameData.player_name = player_name
 	
 	rpc_id(1, "request_create_lobby", player_name)
 
 
-remote func return_lobby_code(s_code):
+remote func return_lobby_code(s_code, player_data):
 	GameData.lobby_code = s_code
 	GameData.host = true
+	GameData.player_data[player_data["name"]] = {
+		"alignment": player_data["alignment"],
+		"features": player_data["features"],
+		"traits": player_data["traits"],
+	}
 	
 	if get_tree().change_scene("res://Scenes/LobbyScreen.tscn") != OK:
 		print("Failed to switch scenes to LobbyScreen")
@@ -42,12 +47,19 @@ remote func return_lobby_code(s_code):
 
 func join_lobby(lobby_code, player_name, requester):
 	GameData.lobby_code = lobby_code
+	GameData.player_name = player_name
 	
 	rpc_id(1, "request_join_lobby", lobby_code, player_name, requester)
 
 
-remote func joined_lobby_successfully(player_names):
-	GameData.player_names = player_names
+remote func joined_lobby_successfully(player_data):
+	for data in player_data:
+		GameData.player_data[data["name"]] = {
+			"alignment": data["alignment"],
+			"features": data["features"],
+			"traits": data["traits"],
+		}
+	
 	GameData.host = false
 	
 	if get_tree().change_scene("res://Scenes/LobbyScreen.tscn") != OK:
@@ -60,12 +72,12 @@ remote func failed_to_join_lobby(error, requester):
 	instance_from_id(requester).display_error(error)
 
 
-func set_player_name(lobby_code, player_name):
-	rpc_id(1, "set_player_name", lobby_code, player_name)
-
-
-remote func player_joined_lobby(player_name):
-	GameData.player_names.append(player_name)
+remote func player_joined_lobby(player_data):
+	GameData.player_data[player_data["name"]] = {
+		"alignment": player_data["alignment"],
+		"features": player_data["features"],
+		"traits": player_data["traits"],
+	}
 
 
 func player_ready():

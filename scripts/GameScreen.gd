@@ -5,6 +5,18 @@ var day = 1
 
 func _ready():
 	GameData.game_scene = self
+	
+	var data = GameData.player_data[GameData.player_name]
+	
+	$HBoxContainer/PlayerCard.create_character(
+		GameData.player_name,
+		data["alignment"],
+		data["features"][0],
+		data["features"][1],
+		data["features"][2],
+		data["traits"][0],
+		data["traits"][1]
+	)
 
 
 func _process(_delta):

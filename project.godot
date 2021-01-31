@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="Rumours"
 run/main_scene="res://Scenes/TitleScreen.tscn"
+config/icon="res://assets/images/icon.png"
 
 [autoload]
 

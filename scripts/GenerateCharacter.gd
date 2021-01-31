@@ -7,13 +7,13 @@ extends TextureRect
 
 var rng = RandomNumberGenerator.new()
 
-func _ready():
-	rng.randomize() #initialize the randomizer
-	generateCharacter()
-
-# Onclick for testing purposes
-func _on_Button_pressed():
-	generateCharacter()
+#func _ready():
+#	rng.randomize() #initialize the randomizer
+#	generateCharacter()
+#
+## Onclick for testing purposes
+#func _on_Button_pressed():
+#	generateCharacter()
 	
 	
 # Fully generates a character for said player
