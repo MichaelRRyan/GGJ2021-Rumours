@@ -16,8 +16,21 @@ _global_script_class_icons={
 [application]
 
 config/name="Rumours"
-config/icon="res://assets/images/icon.png"
+run/main_scene="res://Scenes/TitleScreen.tscn"
+
+[autoload]
+
+CharacterData="*res://scripts/CharacterData.gd"
+InfoData="*res://scripts/InfoData.gd"
+Server="*res://scripts/Server.gd"
+GameData="*res://scripts/GameData.gd"
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep_height"
 
 [rendering]
 
+environment/default_clear_color=Color( 0.231373, 0.2, 0.227451, 1 )
 environment/default_environment="res://default_env.tres"

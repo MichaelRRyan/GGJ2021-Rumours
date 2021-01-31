@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Info.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Card.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/Valera32.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scripts/GameScreen.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/Valera.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 5 )
+
+[node name="GameScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -310.0
+margin_top = -240.0
+margin_right = 310.0
+margin_bottom = 193.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerCard" parent="HBoxContainer" instance=ExtResource( 2 )]
+
+[node name="InfoCard" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 312.0
+margin_right = 620.0
+
+[node name="ReadyUpPanel" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -360.0
+margin_top = -94.0
+margin_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadyUpBox" type="CheckBox" parent="ReadyUpPanel"]
+margin_left = 25.0
+margin_top = 10.0
+margin_right = 269.0
+margin_bottom = 51.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+text = "Ready To Vote"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadyUpTimerLabel" type="Label" parent="ReadyUpPanel"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -40.6674
+margin_right = -25.0
+margin_bottom = -20.6674
+custom_fonts/font = SubResource( 1 )
+text = "Cannot toggle for 60 seconds"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadyUpTimer" type="Timer" parent="ReadyUpPanel"]
+wait_time = 30.0
+one_shot = true
+
+[node name="DayPanel" type="Panel" parent="."]
+margin_right = 164.0
+margin_bottom = 65.0
+
+[node name="Label" type="Label" parent="DayPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -73.0
+margin_top = -15.5
+margin_right = 73.0
+margin_bottom = 16.5
+custom_fonts/font = ExtResource( 3 )
+text = "Day 1"
+align = 1
+[connection signal="toggled" from="ReadyUpPanel/ReadyUpBox" to="." method="_on_ReadyUpBox_toggled"]
+[connection signal="timeout" from="ReadyUpPanel/ReadyUpTimer" to="." method="_on_ReadyUpTimer_timeout"]
