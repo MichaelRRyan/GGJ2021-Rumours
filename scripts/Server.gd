@@ -26,16 +26,10 @@ func _on_connection_failed():
 	print("Failed to Connect")
 
 
-func fetch_text(text_name, requester):
-	rpc_id(1, "fetch_text", text_name, requester)
-
-
-remote func return_text(s_text, requester):
-	instance_from_id(requester).set_text(s_text)
-
-
-func create_lobby():
-	rpc_id(1, "request_create_lobby")
+func create_lobby(player_name):
+	GameData.player_names = [ player_name ]
+	
+	rpc_id(1, "request_create_lobby", player_name)
 
 
 remote func return_lobby_code(s_code):
@@ -45,10 +39,10 @@ remote func return_lobby_code(s_code):
 		print("Failed to switch scenes to LobbyScreen")
 
 
-func join_lobby(lobby_code):
+func join_lobby(lobby_code, player_name, requester):
 	GameData.lobby_code = lobby_code
 	
-	rpc_id(1, "request_join_lobby", lobby_code)
+	rpc_id(1, "request_join_lobby", lobby_code, player_name, requester)
 
 
 remote func joined_lobby_successfully(player_names):
@@ -58,11 +52,15 @@ remote func joined_lobby_successfully(player_names):
 		print("Failed to switch scenes to LobbyScreen")
 	
 
-remote func failed_to_join_lobby():
+remote func failed_to_join_lobby(error, requester):
 	GameData.lobby_code = ""
 	
-	print("Lobby doesn't exist")
+	instance_from_id(requester).display_error(error)
 
 
 func set_player_name(lobby_code, player_name):
 	rpc_id(1, "set_player_name", lobby_code, player_name)
+
+
+remote func player_joined_lobby(player_name):
+	GameData.player_names.append(player_name)
