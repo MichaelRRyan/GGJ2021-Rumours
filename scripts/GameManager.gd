@@ -70,16 +70,12 @@ func join_lobby(lobby_code, player_id, player_name):
 			
 			# Gets all the player names.
 			var player_data = active_games[lobby_code]["player_data"].values()
-			var player_names = []
-			
-			for data in player_data:
-				player_names.append(data["name"])
 			
 			# Prints that the player has been added.
 			print("Player " + str(player_id) + " joined lobby " + lobby_code)
 			
 			# Returns the player names
-			return player_names
+			return player_data
 			
 		else:
 			print("Player " + str(player_id) + " attempted to join game " + lobby_code + " which is in progress")
@@ -91,9 +87,21 @@ func join_lobby(lobby_code, player_id, player_name):
 
 func create_player(lobby_code, player_id, player_name):
 	players[player_id] = lobby_code
+
+	var alignment = randi() % 2
+	var trait1 = randi() % 2 + (alignment * 2)
+	var trait2 = randi() % 17 + 4
+	
+	var feat1 = randi() % 7
+	var feat2 = randi() % 7
+	var feat3 = randi() % 11
 	
 	active_games[lobby_code]["player_data"][player_id] = { 
-		"name": player_name, "traits": [], "ready": false
+		"name": player_name,
+		"alignment": alignment,
+		"features": [ feat1, feat2, feat3 ],
+		"traits": [ trait1, trait2 ],
+		"ready": false
 	}
 
 
@@ -133,3 +141,7 @@ func remove_player(player_id):
 	if active_games[lobby_code]["player_data"].keys().size() == 0:
 		active_games.erase(lobby_code)
 		print("Lobby" + lobby_code + " was closed")
+
+
+func get_player_data(lobby_code, player_id):
+	return active_games[lobby_code]["player_data"][player_id]

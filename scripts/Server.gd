@@ -32,8 +32,10 @@ func _peer_disconnected(player_id):
 remote func request_create_lobby(player_name):
 	var player_id = get_tree().get_rpc_sender_id()
 	var lobby_code = GameManager.create_lobby(player_id, player_name)
+	var player_data = GameManager.get_player_data(lobby_code, player_id)
 	
-	rpc_id(player_id, "return_lobby_code", lobby_code)
+	rpc_id(player_id, "return_lobby_code", lobby_code, player_data)
+	
 	print("Lobby created with code " + lobby_code + " by player " + str(player_id))
 	print(str(GameManager.active_games.keys().size()) + " games active")
 
@@ -47,9 +49,11 @@ remote func request_join_lobby(lobby_code, player_name, requester):
 	else:
 		rpc_id(player_id, "joined_lobby_successfully", result)
 		
+		var player_data = GameManager.get_player_data(lobby_code, player_id)
+		
 		for id in GameManager.active_games[lobby_code]["player_data"].keys():
 			if id != player_id:
-				rpc_id(id, "player_joined_lobby", player_name)
+				rpc_id(id, "player_joined_lobby", player_data)
 
 
 remote func start_game(lobby_code):
