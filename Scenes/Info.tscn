@@ -10,6 +10,7 @@ font_data = ExtResource( 1 )
 [node name="InfoCard" type="TextureRect"]
 margin_right = 308.0
 margin_bottom = 433.0
+rect_min_size = Vector2( 308, 433 )
 texture = ExtResource( 2 )
 stretch_mode = 1
 script = ExtResource( 3 )

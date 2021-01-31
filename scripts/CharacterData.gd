@@ -5,7 +5,16 @@ extends Node
 # 	project.
 
 # A list of dictionaries that defines the character traits.
-var neutral_traits = [
+var traits = [
+	# Innocent traits
+	{ "name": "Investigator", "desc": "Each day can tell if one piece of information is fake or true." },
+	{ "name": "Priest", "desc": "Cannot tell a lie or tell people they are a priest (Second term takes priority)" },
+	
+	# Criminal traits
+	{ "name": "Misinformer", "desc": "Can spread a piece of misinformation to any 1 person." },
+	{ "name": "Forger", "desc": "Can spread rumors pretending to be someone else" },	
+	
+	# Neutral traits	
 	{ "name": "Reporter", "desc": "More power over rumors" },
 	{ "name": "Politician", "desc": "Can silence someones rumors" },
 	{ "name": "Bartender", "desc": "Can pass a rumor they recieve straight onto others as if it's from that person" },
@@ -23,6 +32,38 @@ var neutral_traits = [
 	{ "name": "Child", "desc": "Hears all rumors sent to a specific person but cant send rumors" },
 	{ "name": "Butler", "desc": "Rumors from the butler come always up as fake when investigated" },
 	{ "name": "PR manager", "desc": "Can choose another person and negate all rumors about them this round" }
+]
+
+var features_head = [
+	"res://assets/images/newPlayerIcons/Hat_0.png",
+	"res://assets/images/newPlayerIcons/Hat_1.png",
+	"res://assets/images/newPlayerIcons/Hat_2.png",
+	"res://assets/images/newPlayerIcons/Hat_3.png",
+	"res://assets/images/newPlayerIcons/Hat_4.png",
+	"res://assets/images/newPlayerIcons/Hat_5.png"
+]
+
+var features_face = [
+	"res://assets/images/newPlayerIcons/Face_0.png",
+	"res://assets/images/newPlayerIcons/Face_1.png",
+	"res://assets/images/newPlayerIcons/Face_2.png",
+	"res://assets/images/newPlayerIcons/Face_3.png",
+	"res://assets/images/newPlayerIcons/Face_4.png",
+	"res://assets/images/newPlayerIcons/Face_5.png"
+]
+
+var features_body = [
+	"res://assets/images/newPlayerIcons/Body_0.png",
+	"res://assets/images/newPlayerIcons/Body_1.png",
+	"res://assets/images/newPlayerIcons/Body_2.png",
+	"res://assets/images/newPlayerIcons/Body_3.png",
+	"res://assets/images/newPlayerIcons/Body_4.png",
+	"res://assets/images/newPlayerIcons/Body_5.png",
+	"res://assets/images/newPlayerIcons/Body_6.png",
+	"res://assets/images/newPlayerIcons/Body_7.png",
+	"res://assets/images/newPlayerIcons/Body_8.png",
+	"res://assets/images/newPlayerIcons/Body_9.png",
+	"res://assets/images/newPlayerIcons/Body_10.png"
 ]
 
 var first_names = [

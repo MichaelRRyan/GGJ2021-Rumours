@@ -11,110 +11,63 @@ func _ready():
 	rng.randomize() #initialize the randomizer
 	generateCharacter()
 
-	#onclick for testing purposes
+# Onclick for testing purposes
 func _on_Button_pressed():
 	generateCharacter()
 	
-	#fully generates a character for said player
+	
+# Fully generates a character for said player
 func generateCharacter():
 	var feat1 = rng.randi_range(0, 6) #features hat
 	var feat2 = rng.randi_range(0, 6) #features face
 	var feat3 = rng.randi_range(0, 10) #features body
-	var alignment = rng.randi_range(1, 2) #1 is innocent and 2 is criminal, this should be divided by playercount
-	var roleTrait #trait determined whether a player is innocent or not
-	var roleTraitDesc #description for above role
+	var alignment = rng.randi_range(0, 1) #0 is innocent and 1 is criminal, this should be divided by playercount
+	var trait1 = rng.randi_range(0, 1) + (alignment * 2)
+	var num_traits = CharacterData.traits.size() - 1
+	var trait2 = rng.randi_range(4, num_traits)
 	
 	var firstName = CharacterData.first_names[rng.randi_range(0, CharacterData.first_names.size() - 1)]
 	var lastName = CharacterData.last_names[rng.randi_range(0, CharacterData.last_names.size() - 1)]
-		
-	#set the Name and Last name of the person
-	get_node("TextureRect/Name").text = firstName + " " + lastName
-		#decide feature 1
-	if feat1 == 0:
-		feat1 = load("res://assets/images/newPlayerIcons/Hat_0.png")
-	elif feat1 == 1:
-		feat1 = load("res://assets/images/newPlayerIcons/Hat_1.png")
-	elif feat1 == 2:
-		feat1 = load("res://assets/images/newPlayerIcons/Hat_2.png")
-	elif feat1 == 3:
-		feat1 = load("res://assets/images/newPlayerIcons/Hat_3.png")
-	elif feat1 == 4:
-		feat1 = load("res://assets/images/newPlayerIcons/Hat_4.png")
-	elif feat1 == 5:
-		feat1 = load("res://assets/images/newPlayerIcons/Hat_5.png")
+
+	create_character(firstName + " " + lastName,
+					 rng.randi_range(0, 1),
+					 feat1, feat2, feat3,
+					 trait1, trait2)
+
+
+func create_character(character_name, alignment, feat1, feat2, feat3, trait1, trait2):
+	
+	CharacterData.playerName = character_name
+	CharacterData.playerAlignment = alignment
+	
+	get_node("TextureRect/Name").text = character_name
+
+	# Decide feature 1
+	if feat1 < 6:
+		feat1 = load(CharacterData.features_head[feat1])
 	else:
 		feat1 = null
-		#decide feature 2
-	if feat2 == 0:
-		feat2 = load("res://assets/images/newPlayerIcons/Face_0.png")
-	elif feat2 == 1:
-		feat2 = load("res://assets/images/newPlayerIcons/Face_1.png")
-	elif feat2 == 2:
-		feat2 = load("res://assets/images/newPlayerIcons/Face_2.png")
-	elif feat2 == 3:
-		feat2 = load("res://assets/images/newPlayerIcons/Face_3.png")
-	elif feat2 == 4:
-		feat2 = load("res://assets/images/newPlayerIcons/Face_4.png")
-	elif feat2 == 5:
-		feat2 = load("res://assets/images/newPlayerIcons/Face_5.png")
+		
+	# Decide feature 2
+	if feat2 < 6:
+		feat2 = load(CharacterData.features_face[feat2])
 	else:
 		feat2 = null
-		
-	if feat3 == 0:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_0.png")
-	elif feat3 == 1:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_1.png")
-	elif feat3 == 2:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_2.png")
-	elif feat3 == 3:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_3.png")
-	elif feat3 == 4:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_4.png")
-	elif feat3 == 5:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_5.png")
-	elif feat3 == 6:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_6.png")
-	elif feat3 == 7:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_7.png")
-	elif feat3 == 8:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_8.png")
-	elif feat3 == 9:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_9.png")
-	elif feat3 == 10:
-		feat3 = load("res://assets/images/newPlayerIcons/Body_10.png")
+	
+	# Decide feature 3
+	feat3 = load(CharacterData.features_body[feat3])
 				
-		#set the feature textures
+	# Set the feature textures
 	get_node("TextureRect/feature1").texture = feat1
 	get_node("TextureRect/feature2").texture = feat2
 	get_node("TextureRect/feature3").texture = feat3
 	
-	#decide the alignment and the roleTrait
-	if alignment == 1:
-		roleTrait = rng.randi_range(1, 2)
-		if roleTrait == 1:
-			roleTrait = "Investigator"
-			roleTraitDesc = "Each day can tell if one piece of information is fake or true."
-		elif roleTrait == 2:
-			roleTrait = "Priest"
-			roleTraitDesc = "Cannot tell a lie or tell people they are a priest (Second term takes priority)"
-	else:
-		roleTrait = rng.randi_range(1, 2)
-		if roleTrait == 1:
-			roleTrait = "Misinformer"
-			roleTraitDesc = "Can spread a piece of misinformation to any 1 person."
-		else:
-			roleTrait = "Forger"
-			roleTraitDesc = "Can spread rumors pretending to be someone else"
+	# Decides the alignment and the roleTrait
+	var role_trait = CharacterData.traits[trait1]
 	
-	# Sets the text to the role
-	get_node("VBoxContainer/Trait1").text = roleTrait + ": " + roleTraitDesc
+	get_node("VBoxContainer/Trait1").text = role_trait["name"] + ": " + role_trait["desc"]
 	
 	# Decides the neutral traits and their descriptions.
-	var num_traits = CharacterData.neutral_traits.size() - 1
-	var neut_trait = CharacterData.neutral_traits[rng.randi_range(0, num_traits)]
+	var neut_trait = CharacterData.traits[trait2]
 	
-	# sets the neutral traits and their descriptions.
 	get_node("VBoxContainer/Trait2").text = neut_trait["name"] + ": " + neut_trait["desc"]
-	
-	CharacterData.playerName = firstName + " " + lastName
-	CharacterData.playerAlignment = alignment
