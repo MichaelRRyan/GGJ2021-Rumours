@@ -34,6 +34,7 @@ func create_lobby(player_name):
 
 remote func return_lobby_code(s_code):
 	GameData.lobby_code = s_code
+	GameData.host = true
 	
 	if get_tree().change_scene("res://Scenes/LobbyScreen.tscn") != OK:
 		print("Failed to switch scenes to LobbyScreen")
@@ -47,6 +48,7 @@ func join_lobby(lobby_code, player_name, requester):
 
 remote func joined_lobby_successfully(player_names):
 	GameData.player_names = player_names
+	GameData.host = false
 	
 	if get_tree().change_scene("res://Scenes/LobbyScreen.tscn") != OK:
 		print("Failed to switch scenes to LobbyScreen")
@@ -64,3 +66,24 @@ func set_player_name(lobby_code, player_name):
 
 remote func player_joined_lobby(player_name):
 	GameData.player_names.append(player_name)
+
+
+func player_ready():
+	rpc_id(1, "player_ready", GameData.lobby_code)
+
+
+func player_not_ready():
+	rpc_id(1, "player_not_ready", GameData.lobby_code)
+
+
+remote func vote_started():
+	GameData.game_scene.start_vote()
+
+
+func start_game():
+	rpc_id(1, "start_game", GameData.lobby_code)
+
+
+remote func on_start_game():
+	if get_tree().change_scene("res://Scenes/GameScreen.tscn") != OK:
+		print("Failed to switch scenes to GameScreen")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/fonts/Valera.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/LobbyScreen.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/Valera32.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -37,3 +38,20 @@ anchor_bottom = 1.0
 margin_left = -207.0
 margin_top = -410.0
 margin_right = 207.0
+
+[node name="StartGameButton" type="Button" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -247.0
+margin_top = -98.0
+margin_right = -25.0
+margin_bottom = -25.0
+custom_fonts/font = ExtResource( 3 )
+text = "Start game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="StartGameButton" to="." method="_on_StartGameButton_pressed"]

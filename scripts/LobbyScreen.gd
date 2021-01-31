@@ -9,6 +9,9 @@ func _ready():
 		for name in GameData.player_names:
 			add_player_name(name)
 			player_count += 1
+	
+	if GameData.host:
+		$StartGameButton.show()
 
 
 func _process(_delta):
@@ -23,3 +26,8 @@ func add_player_name(name):
 	name_label.text = name
 	name_label.add_font_override("font", load("res://assets/fonts/Valera32.tres"))
 	$PlayerList.add_child(name_label)
+
+
+func _on_StartGameButton_pressed():
+	if GameData.player_names.size() >= 2:
+		Server.start_game()
