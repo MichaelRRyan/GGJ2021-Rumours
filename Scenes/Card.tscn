@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/Valera.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/paper.png" type="Texture" id=2]
 [ext_resource path="res://scripts/GenerateCharacter.gd" type="Script" id=3]
-[ext_resource path="res://assets/images/playericons/outline.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/newPlayerIcons/Base.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 26
@@ -26,9 +26,9 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -79.0
-margin_right = 79.0
-margin_bottom = 158.0
+margin_left = -100.0
+margin_right = 100.0
+margin_bottom = 240.0
 texture = ExtResource( 4 )
 stretch_mode = 5
 __meta__ = {
@@ -54,10 +54,14 @@ __meta__ = {
 [node name="feature1" type="TextureRect" parent="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -1.52588e-05
 
 [node name="feature2" type="TextureRect" parent="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -65,9 +69,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -130.0
-margin_top = -230.0
+margin_top = -157.0
 margin_right = 130.0
-margin_bottom = -15.0
+margin_bottom = -9.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
