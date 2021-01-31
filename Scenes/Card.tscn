@@ -51,12 +51,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="feature2" type="TextureRect" parent="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="feature1" type="TextureRect" parent="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -1.52588e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="feature2" type="TextureRect" parent="TextureRect"]
+[node name="feature3" type="TextureRect" parent="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {

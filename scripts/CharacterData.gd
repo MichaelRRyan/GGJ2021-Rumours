@@ -123,3 +123,6 @@ var last_names = [
 	"Power",
 	"Lowwe"
 ]
+
+var playerName = ""
+var playerAlignment

@@ -1,7 +1,7 @@
 #author: Conor McDonagh Rollo
 #date: 30/01/21
 #description: Generates a random character for the player
-#bugs: features still overlap
+#bugs: none
 
 extends TextureRect
 
@@ -18,12 +18,11 @@ func _on_Button_pressed():
 	#fully generates a character for said player
 func generateCharacter():
 	var feat1 = rng.randi_range(0, 6) #features hat
-	var feat2 = rng.randi_range(0, 5) #features face
+	var feat2 = rng.randi_range(0, 6) #features face
+	var feat3 = rng.randi_range(0, 10) #features body
 	var alignment = rng.randi_range(1, 2) #1 is innocent and 2 is criminal, this should be divided by playercount
 	var roleTrait #trait determined whether a player is innocent or not
 	var roleTraitDesc #description for above role
-	
-	#make sure features dont overlap (currently broken)
 	
 	var firstName = CharacterData.first_names[rng.randi_range(0, CharacterData.first_names.size() - 1)]
 	var lastName = CharacterData.last_names[rng.randi_range(0, CharacterData.last_names.size() - 1)]
@@ -46,20 +45,48 @@ func generateCharacter():
 	else:
 		feat1 = null
 		#decide feature 2
-	#if feat2 == 1:
-	#	feat2 = load("res://assets/images/newPlayerIcons/backpack.png")
-	#elif feat2 == 2:
-	#	feat2 = load("res://assets/images/newPlayerIcons/cowboy.png")
-	#elif feat2 == 3:
-	#	feat2 = load("res://assets/images/newPlayerIcons/roundglasses.png")
-	#elif feat2 == 4:
-	#	feat2 = load("res://assets/images/newPlayerIcons/squareglasses.png")
-	#else:
-	#	feat2 = load("res://assets/images/newPlayerIcons/smoking.png")
+	if feat2 == 0:
+		feat2 = load("res://assets/images/newPlayerIcons/Face_0.png")
+	elif feat2 == 1:
+		feat2 = load("res://assets/images/newPlayerIcons/Face_1.png")
+	elif feat2 == 2:
+		feat2 = load("res://assets/images/newPlayerIcons/Face_2.png")
+	elif feat2 == 3:
+		feat2 = load("res://assets/images/newPlayerIcons/Face_3.png")
+	elif feat2 == 4:
+		feat2 = load("res://assets/images/newPlayerIcons/Face_4.png")
+	elif feat2 == 5:
+		feat2 = load("res://assets/images/newPlayerIcons/Face_5.png")
+	else:
+		feat2 = null
 		
+	if feat3 == 0:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_0.png")
+	elif feat3 == 1:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_1.png")
+	elif feat3 == 2:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_2.png")
+	elif feat3 == 3:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_3.png")
+	elif feat3 == 4:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_4.png")
+	elif feat3 == 5:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_5.png")
+	elif feat3 == 6:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_6.png")
+	elif feat3 == 7:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_7.png")
+	elif feat3 == 8:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_8.png")
+	elif feat3 == 9:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_9.png")
+	elif feat3 == 10:
+		feat3 = load("res://assets/images/newPlayerIcons/Body_10.png")
+				
 		#set the feature textures
 	get_node("TextureRect/feature1").texture = feat1
-	#get_node("TextureRect/feature2").texture = feat2
+	get_node("TextureRect/feature2").texture = feat2
+	get_node("TextureRect/feature3").texture = feat3
 	
 	#decide the alignment and the roleTrait
 	if alignment == 1:
@@ -88,3 +115,6 @@ func generateCharacter():
 	
 	# sets the neutral traits and their descriptions.
 	get_node("VBoxContainer/Trait2").text = neut_trait["name"] + ": " + neut_trait["desc"]
+	
+	CharacterData.playerName = firstName + " " + lastName
+	CharacterData.playerAlignment = alignment

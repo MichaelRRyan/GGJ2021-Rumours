@@ -21,6 +21,7 @@ run/main_scene="res://Scenes/Card.tscn"
 [autoload]
 
 CharacterData="*res://scripts/CharacterData.gd"
+InfoData="*res://scripts/InfoData.gd"
 
 [display]
 
